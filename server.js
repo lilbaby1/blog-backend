@@ -14,6 +14,8 @@ const connectDB = require('./config/dbConn')
 
 const PORT = process.env.PORT || 3500
 
+mongoose.set('strictQuery', false)
+
 // Connect to MongoDB
 connectDB()
 
@@ -23,7 +25,7 @@ app.use(logger)
 // and fetch cookies credentials requirement
 app.use(credentials)
 
-app.use(cors(corsOptions))
+//app.use(cors(corsOptions))
 
 // built-in middleware to handle urlencoded data in other words, form data:
 app.use(express.urlencoded({ extended: false }))
