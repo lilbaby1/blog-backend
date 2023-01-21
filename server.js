@@ -23,7 +23,7 @@ app.use(logger)
 
 // Handle options credentials check - before CORS! 
 // and fetch cookies credentials requirement
-app.use(credentials)
+// app.use(credentials)
 
 //app.use(cors(corsOptions))
 
