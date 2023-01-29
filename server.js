@@ -48,6 +48,7 @@ app.use('/refresh', require('./routes/refresh'))
 //app.use(verifyJWT)
 app.use('/posts', require('./routes/api/posts'))
 app.use('/users', require('./routes/api/users'))
+app.use('/comments', require('./routes/api/comments'))
 
 // Handling requests for routes that do not exist
 app.all('*', (req, res) => {

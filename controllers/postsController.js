@@ -8,6 +8,23 @@ const getAllPosts = async (req, res) => {
     res.status(200).json(posts)
 }
 
+const getPostsWithPagination = async (req, res) => {
+    const { page, limit, sort } = req.query
+    const count = await Post.countDocuments()
+
+    if (!page) page = 1
+    if (!limit) limit = 5
+    let sortOrder = { date: -1 }
+    if (sort === 'oldest') sortOrder = { date: 1 } 
+
+    const posts = await Post.find()
+        .sort(sortOrder)
+        .skip((page - 1) * limit)
+        .limit(limit)
+    if (!posts) return res.status(204).json({ "message": "No posts found." })
+    res.status(200).json({ posts, count })
+}
+
 const createNewPost = async (req, res) => {
 
     if (!req?.body?.title || !req?.body?.content) {
@@ -26,8 +43,9 @@ const createNewPost = async (req, res) => {
             edited: null
         })
         res.sendStatus(201)
-    } catch (err) {
-        console.error(err)
+    } catch (error) {
+        console.error(error)
+        res.status(500).json(error)
     }
 }
 
@@ -67,8 +85,8 @@ const getPostById = async (req, res) => {
         if (!post) return res.status(204).json({ "message": `No post matches ID ${req.params.id}.` })
         res.status(200).json(post)
     } catch (error) {
-        res.status(400).json(error)
+        res.status(500).json(error)
     }
 }
 
-module.exports = { getAllPosts, createNewPost, updatePost, deletePost, getPostById }
+module.exports = { getAllPosts, createNewPost, updatePost, deletePost, getPostById, getPostsWithPagination }
