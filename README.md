@@ -14,6 +14,9 @@ REFRESH_TOKEN_SECRET=0c22733b861fe4819839815c16a85a9fa9b5d269f7397c15c4bec1ae64d
 DATABASE_URI=mongodb+srv://User2:Testing123@cluster0.x6oqu1d.mongodb.net/?retryWrites=true&w=majority <br />
 The default PORT is 3500
 
+<p>Make sure you have npm installed.</p>
+<p>Use npm run dev to start the server</p>
+
 <h4>Admin - walt1 <br />
 Password - walt1</h4>
 User - walt2 <br />
